@@ -1,0 +1,74 @@
+@startuml Trabalho 2
+left to right direction
+skinparam Style strictuml
+ 
+actor "Usuario do Sistema" as u_Sys
+actor "Usuario cadastrado" as u_Cad
+actor "Host" as host
+actor "Sistema" as sys
+ 
+'Casos de uso do usuario do sistema
+usecase "Enviar mensagem" as msg
+usecase "Iniciar conversa por chat" as chat
+usecase "Fazer login" as login
+usecase "Fazer cadastro" as cadastro
+usecase "Adicionar amigos" as amigos
+usecase "Permitir acesso a camera" as cam
+usecase "Escolher plataforma" as plat
+usecase "Criar grupo de amigos" as grupo
+usecase "Permitir acesso a tela" as tela
+usecase "Permitir acesso ao microfone" as mic
+usecase "Aceitar convite para ingressar na sessão" as acc
+usecase "Vincular sua conta com plataformas diponiveis no sistema" as vincular_conta 
+usecase "Sugerir atividade" as ativ
+usecase "Iniciar sessão" as sessao
+usecase "Enviar convite para outras pessoas" as convite
+usecase "Retirar convidados da sessão" as convidados
+usecase "Encerrar sessão" as fim
+usecase "Silenciar convidado" as mutar
+usecase "Vincular Plataforma" as vincular_plataforma
+usecase "Fazer logoff" as logoff
+
+'componente do usuario do sistema
+u_Sys --> login
+u_Sys --> cadastro
+
+'componente do usuario cadastro
+u_Cad --> msg
+u_Cad --> chat
+u_Cad --> amigos
+u_Cad --> plat
+u_Cad --> grupo
+u_Cad --> vincular_conta
+u_Cad --> acc
+u_Cad --> logoff
+
+'componente do sistema
+u_Cad --> cam
+u_Cad --> tela
+u_Cad --> mic
+
+'compoenten do host
+host --> sessao
+
+'componente do sistema
+sys --> ativ
+sys --> vincular_plataforma
+
+
+'herenca
+u_Cad <|-- host
+
+
+'componente da sessão
+sessao -- convidados:extend
+sessao -- fim:extend
+sessao -- mutar:extend
+sessao -- convite:extend
+
+component Sessão
+component Usuário
+component Sistema
+ 
+@enduml
+

@@ -1,0 +1,76 @@
+@startuml modelo-conceitual
+class UsuarioSistema{
+    Integer ID_usuario;
+}
+
+class UsuarioCadastrado{
+    Integer ID_usuario;
+    String userName;
+}
+    
+class Host {
+    Integer ID_sessao;
+}
+
+class Sistema{
+    String sugestao;
+}
+
+class Sessão{
+    Integer ID_sessao;
+    Integer qtd_usu;
+}
+
+class Plataforma{
+    Integer ID_plataforma;
+    String nome_plataforma; 
+}
+
+UsuarioSistema : fazerLogin()
+UsuarioSistema : fazerCadastro()
+
+Sistema : fazerSugestao()
+Sistema : vincularPlataforma()
+
+
+UsuarioCadastrado : enviarMsg()
+UsuarioCadastrado : iniciarConversa()
+UsuarioCadastrado : fazerLogin()
+UsuarioCadastrado : fazerCadastro()
+UsuarioCadastrado : adicionarAmigos()
+UsuarioCadastrado : permitirCam()
+UsuarioCadastrado : escolherPlat()
+UsuarioCadastrado : criarGrupo()
+UsuarioCadastrado : permitirTela()
+UsuarioCadastrado : permitirMic()
+UsuarioCadastrado : aceitarIngresso()
+UsuarioCadastrado : vincularConta()
+
+
+Host : iniciarSessao()
+Host : enviarConvites()
+Host : retirarConvidados()
+Host : encerrarSessao()
+Host : silenciarConvidado()
+
+Plataforma : verf_disp_cont()   
+
+UsuarioCadastrado "1..*" --> "1..*" Sessão : é membro da
+UsuarioCadastrado ^-- Host 
+
+Host "1" o-- "1..*" Sessão : pertence ao
+
+Sistema "1" --> "1..*" UsuarioCadastrado : sugere
+
+Sistema "1" --> "1..*" Plataforma : está vinculado
+
+UsuarioCadastrado "1" --> "1..*" UsuarioCadastrado : conversa
+
+UsuarioCadastrado "1" --> "1..*" Plataforma
+
+UsuarioSistema "1..*" --> "1" Sistema
+
+Plataforma -[hidden]--> UsuarioSistema : sugere
+
+
+@enduml
